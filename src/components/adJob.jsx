@@ -92,7 +92,7 @@ const HRPostJobPage = () => {
     <div style={{
       minHeight: '100vh',
       display: 'flex',
-      background: '#f7f7f7'
+      background: "linear-gradient(135deg, #1A2A3A, #101D2C)",
     }}>
       {/* Sidebar */}
       <Box

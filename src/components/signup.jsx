@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { TextField, Button, Typography, Box, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Image from "../loginPage.png";
+import { IconButton, InputAdornment } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+
 
 const Register = () => {
   const navigate = useNavigate();
@@ -44,7 +47,10 @@ const Register = () => {
       },
     }));
   };
-
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
+const toggleConfirmPasswordVisibility = () => setShowConfirmPassword((prev) => !prev);
 
   const handleSubmit = async () => {
     const url = "http://localhost:8000/api/register/";
@@ -150,24 +156,43 @@ const Register = () => {
               value={formData.email}
               onChange={handleInputChange}
             />
-            <TextField
-              name="password"
-              label="Password"
-              type="password"
-              fullWidth
-              sx={{ flex: "1 1 48%" }}
-              value={formData.password}
-              onChange={handleInputChange}
-            />
-            <TextField
-              name="confirmPassword"
-              label="Confirm Password"
-              type="password"
-              fullWidth
-              sx={{ flex: "1 1 48%" }}
-              value={formData.confirmPassword}
-              onChange={handleInputChange}
-            />
+           <TextField
+  name="password"
+  label="Password"
+  type={showPassword ? "text" : "password"}
+  fullWidth
+  sx={{ flex: "1 1 48%" }}
+  value={formData.password}
+  onChange={handleInputChange}
+  InputProps={{
+    endAdornment: (
+      <InputAdornment position="end">
+        <IconButton onClick={() => setShowPassword((prev) => !prev)} edge="end">
+          {showPassword ? <VisibilityOff /> : <Visibility />}
+        </IconButton>
+      </InputAdornment>
+    ),
+  }}
+/>
+
+<TextField
+  name="confirmPassword"
+  label="Confirm Password"
+  type={showConfirmPassword ? "text" : "password"}
+  fullWidth
+  sx={{ flex: "1 1 48%" }}
+  value={formData.confirmPassword}
+  onChange={handleInputChange}
+  InputProps={{
+    endAdornment: (
+      <InputAdornment position="end">
+        <IconButton onClick={() => setShowConfirmPassword((prev) => !prev)} edge="end">
+          {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+        </IconButton>
+      </InputAdornment>
+    ),
+  }}
+/>
   
             <FormControl fullWidth sx={{ flex: "1 1 100%", mt: 1 }}>
               <InputLabel id="role-label">Select Role</InputLabel>

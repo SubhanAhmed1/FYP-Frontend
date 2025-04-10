@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { TextField, Button, Typography, Box, Alert } from "@mui/material";
 import axios from "axios";
 import Image from "../loginPage.png";
+import { IconButton, InputAdornment } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+
 const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [error, setError] = useState(""); // State to hold error messages
@@ -97,7 +100,8 @@ const Login = () => {
       }
     }
   };
-  
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   return (
     <Box
@@ -143,15 +147,24 @@ const Login = () => {
             value={formData.username}
             onChange={handleInputChange}
           />
-          <TextField
-            name="password"
-            label="Password"
-            type="password"
-            fullWidth
-            margin="normal"
-            value={formData.password}
-            onChange={handleInputChange}
-          />
+<TextField
+  name="password"
+  label="Password"
+  type={showPassword ? "text" : "password"}
+  fullWidth
+  sx={{ flex: "1 1 48%" }}
+  value={formData.password}
+  onChange={handleInputChange}
+  InputProps={{
+    endAdornment: (
+      <InputAdornment position="end">
+        <IconButton onClick={() => setShowPassword((prev) => !prev)} edge="end">
+          {showPassword ? <VisibilityOff /> : <Visibility />}
+        </IconButton>
+      </InputAdornment>
+    ),
+  }}
+/>
   
           <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 1 }}>
             <Typography variant="body2" sx={{ color: "#266CA9", cursor: "pointer" }}>
