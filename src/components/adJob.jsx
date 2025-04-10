@@ -153,79 +153,72 @@ const HRPostJobPage = () => {
       </Box>
 
  {/* Main Content */}
-<Container
-  maxWidth="md"
-  sx={{
-    marginLeft: { sm: '450px' }, // match sidebar width
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '100vh',
-    py: 4,
-  }}
+{/* Main Content */}
+<div style={{ marginLeft: '250px', width: '100%', display: 'flex', flexDirection: 'row', minHeight: '60vh' }}>
+  {/* Left Side - Form */}
+ 
+  {/* Right Side - Visual Section */}
+  <Box
+    flex={1}
+    display="flex"
+    justifyContent="center"
+    alignItems="center"
+    flexDirection="column"
+    sx={{
+      background: 'linear-gradient(135deg, #0077B6, #023E8A)',
+      color: 'white',
+      textAlign: 'center',
+      p: 4
+    }}
+  >
+    <Typography variant="h4" fontWeight="bold" mb={2}>
+      Connect with Talent
+    </Typography>
+    <Typography variant="h6" mb={4}>
+      Post roles. Get applicants. Grow fast.
+    </Typography>
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png"
+      alt="Hiring Illustration"
+      style={{ width: '250px', height: 'auto' }}
+    />
+  </Box>
+  <Box
+  flex={1}
+  display="flex"
+  justifyContent="center"
+  alignItems="center"
+  p={4}
+  sx={{ backgroundColor: '#f4f6f8' }}
 >
-  <Card sx={{ p: 4, borderRadius: 2, boxShadow: 4, backgroundColor: '#fff', width: '100%' }}>
+  <Card sx={{ width: '100%', maxWidth: 650, p: 4, borderRadius: 4, boxShadow: 4 }}>
     <CardContent>
-      <Typography variant="h5" textAlign="center" mb={3} color="#266CA9" fontWeight="bold">
-        Post a Job
+      <Typography variant="h5" textAlign="center" fontWeight="bold" mb={3} color="primary">
+        Post a New Job
       </Typography>
 
       <Box component="form" onSubmit={handleSubmit}>
         <Grid container spacing={2}>
-          {/* Row 1: Title */}
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Title"
-              name="title"
-              value={formData.title}
-              onChange={handleInputChange}
-            />
+          {/* Job Title & Experience */}
+          <TextField fullWidth label="Job Title" name="title" value={formData.title} onChange={handleInputChange} />
+          <Grid item xs={12} sm={6}>
+            <TextField fullWidth label="Experience" name="experience" value={formData.experience} onChange={handleInputChange} />
           </Grid>
 
-          {/* Row 2: Location + Pay */}
+          {/* Qualification & Pay */}
           <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Location"
-              name="location"
-              value={formData.location}
-              onChange={handleInputChange}
-            />
+            <TextField fullWidth label="Qualification" name="qualification" value={formData.qualification} onChange={handleInputChange} />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Pay"
-              name="pay"
-              type="number"
-              value={formData.pay}
-              onChange={handleInputChange}
-            />
+            <TextField fullWidth label="Pay" name="pay" type="number" value={formData.pay} onChange={handleInputChange} />
           </Grid>
 
-          {/* Row 3: Qualification + Experience + Job Type */}
-          <Grid item xs={12} sm={4}>
-            <TextField
-              fullWidth
-              label="Qualification"
-              name="qualification"
-              value={formData.qualification}
-              onChange={handleInputChange}
-            />
+          {/* Location & Job Type */}
+          <Grid item xs={12} sm={6}>
+            <TextField fullWidth label="Location" name="location" value={formData.location} onChange={handleInputChange} />
           </Grid>
-          <Grid item xs={12} sm={4}>
-            <TextField
+          <TextField
               fullWidth
-              label="Experience"
-              name="experience"
-              value={formData.experience}
-              onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <TextField
-              width="20%"  
               select
               label="Job Type"
               name="jobType"
@@ -235,36 +228,30 @@ const HRPostJobPage = () => {
               <MenuItem value="FT">Full-Time</MenuItem>
               <MenuItem value="PT">Part-Time</MenuItem>
             </TextField>
-          </Grid>
 
-          {/* Row 4: Description - full width */}
-          <Grid item xs={0}>
-            <TextField
+          {/* Description */}
+          <TextField
               fullWidth
               label="Description"
               name="description"
               multiline
-              rows={4}
+              rows={3}
               value={formData.description}
               onChange={handleInputChange}
             />
-          </Grid>
-        </Grid>
 
-        {/* Post Job button */}
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          sx={{ mt: 3 }}
-        >
-          Post Job
-        </Button>
+          <Button type="submit" fullWidth variant="contained" color="primary" size="large">
+              Post Job
+            </Button>
+        </Grid>
       </Box>
     </CardContent>
   </Card>
-</Container>
+</Box>
+
+</div>
+
+
 
 
     </div>

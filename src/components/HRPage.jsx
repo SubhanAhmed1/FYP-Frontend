@@ -203,7 +203,7 @@ const HRHomePage = () => {
 
       {/* Main Content */}
       <Box flexGrow={1} marginLeft="250px">
-        <Container maxWidth="md" style={{
+        <Container  style={{
           marginTop: '2rem', padding: '2rem',
           borderRadius: '8px', background: theme.palette.background.default,
           boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
@@ -246,7 +246,7 @@ const HRHomePage = () => {
           </Box>
         </Box>
 
-        <Typography variant="h2" style={{ fontWeight: 'bold', fontSize: '2.2rem', marginBottom: '0.25rem' }}>
+        <Typography variant="h2" style={{ fontWeight: 'bold', fontSize: '2rem', marginBottom: '0.5rem' }}>
           {job.Title}
         </Typography>
         <Typography
@@ -290,7 +290,7 @@ const HRHomePage = () => {
         <Divider style={{ marginBottom: '1rem' }} />
 
         <Box>
-          <Typography variant="body2" sx={{ fontWeight: 'bold', marginBottom: '0.25rem' }}>
+          <Typography variant="body2" sx={{ fontSize:'20px', fontWeight: 'bold', marginBottom: '0.25rem' }}>
             ${job.Pay}/yr
           </Typography>
           <Typography variant="body2" color="textSecondary">
