@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField, Button, Typography, Box, Alert } from "@mui/material";
 import axios from "axios";
-
+import Image from "../loginPage.png";
 const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [error, setError] = useState(""); // State to hold error messages
@@ -103,75 +103,115 @@ const Login = () => {
     <Box
       sx={{
         display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
         minHeight: "100vh",
         background: "linear-gradient(135deg, #1A2A3A, #101D2C)",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
       <Box
         sx={{
-          maxWidth: 500,
-          width: "100%",
-          background: "#fff",
-          padding: 4,
-          borderRadius: "8px",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+          width: "90%",
+          maxWidth: "1000px",
+          display: "flex",
+          backgroundColor: "#fff",
+          borderRadius: "12px",
+          overflow: "hidden",
+          boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
         }}
       >
-        <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold", color: "#041D56" }}>
-          Welcome Back
-        </Typography>
-
-        {/* Show error message if there's any */}
-        {error && (
-          <Alert severity="error" sx={{ marginBottom: 2 }}>
-            {error}
-          </Alert>
-        )}
-
-        <TextField
-          name="username"
-          label="Username"
-          fullWidth
-          margin="normal"
-          value={formData.username}
-          onChange={handleInputChange}
-        />
-        <TextField
-          name="password"
-          label="Password"
-          type="password"
-          fullWidth
-          margin="normal"
-          value={formData.password}
-          onChange={handleInputChange}
-        />
-        <Button
-          variant="contained"
-          fullWidth
-          onClick={handleLogin}
+        {/* Left side - Login Form */}
+        <Box sx={{ flex: 1, padding: 5 }}>
+          <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold", color: "#041D56" }}>
+            Log in.
+          </Typography>
+          <Typography variant="body2" sx={{ mb: 3, color: "#666" }}>
+            Log in with your data that you entered during your registration.
+          </Typography>
+  
+          {error && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {error}
+            </Alert>
+          )}
+  
+          <TextField
+            name="username"
+            label="Username"
+            fullWidth
+            margin="normal"
+            value={formData.username}
+            onChange={handleInputChange}
+          />
+          <TextField
+            name="password"
+            label="Password"
+            type="password"
+            fullWidth
+            margin="normal"
+            value={formData.password}
+            onChange={handleInputChange}
+          />
+  
+          <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 1 }}>
+            <Typography variant="body2" sx={{ color: "#266CA9", cursor: "pointer" }}>
+              Forgot password?
+            </Typography>
+          </Box>
+  
+          <Button
+            variant="contained"
+            fullWidth
+            onClick={handleLogin}
+            sx={{
+              backgroundColor: "#266CA9",
+              color: "#fff",
+              mt: 3,
+              "&:hover": { backgroundColor: "#0F2573" },
+            }}
+          >
+            Log in
+          </Button> 
+          <Typography variant="body2" sx={{ mt: 3, textAlign: "center", color: "#777" }}>
+            Don’t have an account?{" "}
+            <span
+              style={{ color: "#266CA9", cursor: "pointer" }}
+              onClick={() => navigate("/signup")}
+            >
+              Register
+            </span>
+          </Typography>
+        </Box>
+  
+        {/* Right side - Illustration & Welcome Text */}
+        <Box
           sx={{
-            backgroundColor: "#266CA9",
+            flex: 1,
+            background: "linear-gradient(135deg, #266CA9, #0F2573)",
             color: "#fff",
-            mt: 2,
-            "&:hover": { backgroundColor: "#0F2573" },
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 5,
           }}
         >
-          Login Now
-        </Button>
-        <Typography variant="body2" sx={{ mt: 2, textAlign: "center", color: "#777" }}>
-          Don't have an account?{" "}
-          <span
-            style={{ color: "#266CA9", cursor: "pointer" }}
-            onClick={() => navigate("/signup")}
-          >
-            Register here
-          </span>
-        </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Nice to see you again
+          </Typography>
+          <Typography variant="h3" sx={{ fontWeight: "bold", mb: 4 }}>
+            Welcome back
+          </Typography>
+          <img
+            src={Image}
+            alt="Login illustration"
+            style={{ width: "80%", maxWidth: 300 }}
+          />
+        </Box>
       </Box>
     </Box>
   );
+  
 };
 
 export default Login;

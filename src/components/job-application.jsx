@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Image from "../Avatar.png";
 import { useSelector } from "react-redux";
 import { createTheme } from "@mui/material/styles";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const { Text } = Typography;
 
@@ -162,6 +163,24 @@ const JobApplicationsPage = () => {
       [name]: value,
     });
   };
+  const handleLogout = async () => {
+    const token = localStorage.getItem('access_token');
+    try {
+      const res = await fetch("http://localhost:8000/api/logout/", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (res.ok) {
+        localStorage.clear();
+        navigate('/login');
+      } else {
+        alert("Logout failed!");
+      }
+    } catch (err) {
+      alert("Logout error!");
+      console.error(err);
+    }
+  };
 
   return (
     <Box display="flex">
@@ -169,69 +188,57 @@ const JobApplicationsPage = () => {
       <Box
         width="250px"
         bgcolor="#ffffff"
-        height="100vh"
+        height="90vh"
         padding="2rem 1rem"
         boxShadow="2px 0 6px rgba(0,0,0,0.1)"
         display="flex"
         flexDirection="column"
+        justifyContent="space-around"
         alignItems="center"
         position="fixed"
         top={0}
         left={0}
         zIndex={1200}
       >
-        <Box
-          component="img"
-          src={Image}
-          alt="Profile"
-          borderRadius="50%"
-          width="100px"
-          height="100px"
-          marginBottom="1rem"
-        />
-        <Typography
-          variant="h5"
-          fontWeight="bold"
-          marginBottom="2rem"
-          sx={{
-            backgroundColor: "black",
-            color: "white",
-            padding: "0.5rem 1rem",
-            borderRadius: "8px",
-            textAlign: "center",
-          }}
-        >
-          {jobs.length > 0 ? jobs[0]?.PostedByHR?.Name || "Company" : "Company"}
-        </Typography>
+        <Box width="100%" flexGrow={1} display="flex" flexDirection="column" alignItems="center">
+          <Box
+            component="img"
+            src={Image}
+            alt="Profile"
+            borderRadius="50%"
+            width="100px"
+            height="100px"
+            mb={2}
+          />
+          <Typography variant="h6" fontWeight="bold" mb={3}>
+            {jobs.length > 0 ? jobs[0]?.PostedByHR?.Name || 'Company' : 'Company'}
+          </Typography>
 
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          onClick={() => navigate("/hr")}
-          sx={{ mb: 2 }}
-        >
-          My Posted Jobs
-        </Button>
+          <Button fullWidth variant="contained"color="primary" onClick={() => navigate('/hr')} sx={{ mb: 2 }}>
+            My Posted Jobs
+          </Button>
 
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          onClick={() => navigate("/hr/post-job")}
-          sx={{ mb: 2 }}
-        >
-          Add Job +
-        </Button>
+          <Button fullWidth variant="contained" color="primary" onClick={() => navigate('/hr/post-job')} sx={{ mb: 2 }}>
+            Add Job +
+          </Button>
 
-        <Button
-          fullWidth
-          variant="contained"
-          color={isOnPostedJobs ? "success" : "primary"}
-          onClick={() => navigate("/hr/JobApplications")}
-        >
-          All Job Applications
-        </Button>
+          <Button fullWidth variant="contained" color={isOnPostedJobs ? 'success' : 'primary'} onClick={() => navigate('/hr/JobApplications')}>
+            All Job Applications
+          </Button>
+        </Box>
+
+        {/* Logout */}
+        <Box width="100%" mt={3}>
+          <Button
+            fullWidth
+            variant="outlined"
+            color="error"
+            onClick={handleLogout}
+            startIcon={<LogoutIcon />}
+          >
+            Logout
+          </Button>
+        </Box>
       </Box>
 
       {/* Content Area */}
@@ -250,7 +257,7 @@ const JobApplicationsPage = () => {
             dataSource={jobApplications}
             rowKey="id"
             bordered
-            pagination={{ pageSize: 5 }}
+            pagination={{ pageSize: 15 }}
           />
         )}
       </Box>
